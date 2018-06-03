@@ -13,6 +13,10 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import {LoginPage} from "../pages/login/login";
 import {RegisterPage} from "../pages/register/register";
 import {HttpClient, HttpClientModule} from "@angular/common/http";
+import { UserProvider } from '../providers/user/user';
+import {BackButtonService} from '../providers/back-button/backButton.service';
+import {ScreenOrientation} from "@ionic-native/screen-orientation";
+import {IonicStorageModule} from "@ionic/storage";
 
 @NgModule({
   declarations: [
@@ -27,7 +31,8 @@ import {HttpClient, HttpClientModule} from "@angular/common/http";
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
-    HttpClientModule
+    HttpClientModule,
+    IonicStorageModule.forRoot(),
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -43,7 +48,11 @@ import {HttpClient, HttpClientModule} from "@angular/common/http";
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    HttpClient
+    HttpClient,
+    UserProvider,
+    Storage,
+    BackButtonService,
+    ScreenOrientation
   ]
 })
 export class AppModule {}
