@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
+import {RegisterPage} from "../register/register";
+import {PracticePage} from "../practice/practice";
+import {IntroductionPage} from "../introduction/introduction";
 
 @Component({
   selector: 'page-home',
@@ -9,6 +12,27 @@ export class HomePage {
 
   constructor(public navCtrl: NavController) {
 
+  }
+
+  /**
+   * 注册
+   */
+  goRegister() {
+    this.navCtrl.push(RegisterPage);
+  }
+
+  /**
+   * 练习
+   */
+  goPractice() {
+    this.navCtrl.push(PracticePage);
+  }
+
+  /**
+   * 表情介绍页面
+   */
+  goIntroduction() {
+    this.navCtrl.push(IntroductionPage);
   }
 
 }

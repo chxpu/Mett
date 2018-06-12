@@ -3,9 +3,9 @@ import {App, IonicPage, LoadingController, NavController, Platform, ToastControl
 import { Storage } from '@ionic/storage'
 import {BackButtonService} from "../../providers/back-button/backButton.service";
 import { ScreenOrientation } from '@ionic-native/screen-orientation';
-import {UserProvider} from "../../providers/user/user";
 import {TabsPage} from "../tabs/tabs";
 import {RegisterPage} from "../register/register";
+import {UserServiceProvider} from "../../providers/user-service/user.service";
 
 @IonicPage()
 @Component({
@@ -26,7 +26,7 @@ export class LoginPage {
               private platform: Platform,
               private screenOrientation: ScreenOrientation,
               private toastCtrl: ToastController,
-              private userService: UserProvider,
+              private userService: UserServiceProvider,
               private navCtrl: NavController,) {
     // 注册返回键服务
     this.platform.ready().then(() => {
