@@ -3,6 +3,7 @@ import { NavController } from 'ionic-angular';
 import {RegisterPage} from "../register/register";
 import {PracticePage} from "../practice/practice";
 import {IntroductionPage} from "../introduction/introduction";
+import {PersonalPage} from "../personal/personal";
 
 @Component({
   selector: 'page-home',
@@ -33,6 +34,13 @@ export class HomePage {
    */
   goIntroduction() {
     this.navCtrl.push(IntroductionPage);
+  }
+
+  /**
+   * 个人中心
+   */
+  goPersoner() {
+    this.navCtrl.push(PersonalPage);
   }
 
 }

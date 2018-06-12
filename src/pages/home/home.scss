@@ -1,3 +1,48 @@
 page-home {
+  background: url("./../assets/imgs/02.JPG") no-repeat;
+  background-size: cover;
+  .content {
+    background: none;
+    .container-top {
+      margin-top: 20%;
+      p {
+        text-align: center;
+        color: #70706E;
+        font-size:2rem;
+        font-weight: bold;
+      }
+    }
+    .container{
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      height: 70%;
+      .btn-round {
+        width: 8rem;
+        height: 8rem;
+        border: 1px solid #D3D6DD;
+        box-shadow: 0px 0px 3px #737171;
+        border-radius: 50%;
+        background-color: #FFF;
+        opacity: 0.3;
+        color: #000000;
+        font-size: 2rem;
+        font-weight: bold;
+      }
+      .container-bottom{
+        display: flex;
+        justify-content:space-around;
+        #home-btn1{
 
+        }
+        #home-btn2{
+          width: 11rem;
+          height: 11rem;
+        }
+        #home-btn3{
+
+        }
+      }
+    }
+  }
 }

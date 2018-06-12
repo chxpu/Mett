@@ -1,16 +1,16 @@
-<ion-header>
-  <ion-navbar>
-    <ion-title>Home</ion-title>
-  </ion-navbar>
-</ion-header>
-
-<ion-content padding>
-  <button ion-button full (click)="goPractice()">
-    测试
-  </button>
-
-  <button ion-button full (click)="goIntroduction()">
-    表情介绍
-  </button>
+<ion-content padding class="content">
+  <div class="container-top">
+    <p>Mett</p>
+    <p style="letter-spacing: 1px">遇见更好的自己</p>
+  </div>
+  <div class="container">
+    <div class="container-bottom">
+      <button class="btn-round" id="home-btn1" (click)="goIntroduction()">介绍</button>
+      <button class="btn-round" id="home-btn2" (click)="goPractice()">训练</button>
+      <button class="btn-round" id="home-btn3" (click)="goPersoner()">个人中心</button>
+    </div>
+  </div>
 
 </ion-content>
+
+

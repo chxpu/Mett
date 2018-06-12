@@ -3,9 +3,9 @@ import {App, IonicPage, LoadingController, NavController, Platform, ToastControl
 import { Storage } from '@ionic/storage'
 import {BackButtonService} from "../../providers/back-button/backButton.service";
 import { ScreenOrientation } from '@ionic-native/screen-orientation';
-import {TabsPage} from "../tabs/tabs";
 import {RegisterPage} from "../register/register";
 import {UserServiceProvider} from "../../providers/user-service/user.service";
+import {HomePage} from "../home/home";
 
 @IonicPage()
 @Component({
@@ -99,7 +99,7 @@ export class LoginPage {
             else {
               // 登录成功，更新userToken
               this.showToast(data.msg, 1500,'bottom','');
-              this.app.getRootNav().setRoot(TabsPage);
+              this.app.getRootNav().setRoot(HomePage);
             }
           },
           error1 => {
