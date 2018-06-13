@@ -1,4 +1,4 @@
-export class AaceAttributes {
+export class FaceAttributes {
   gender: string;
   age: number;
   emotion: {
