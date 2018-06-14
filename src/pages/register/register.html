@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>用户注册</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list>
+    <ion-item>
+      <ion-label floating>{{checkName()}}</ion-label>
+      <ion-input type="text" [(ngModel)]="username" clearInput></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>{{checkPassword()}}</ion-label>
+      <ion-input type="text" [(ngModel)]="password" clearInput></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>{{checkConfirmPassword()}}</ion-label>
+      <ion-input type="text" [(ngModel)]="confirmPassword" clearInput></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>{{checkEmail()}}</ion-label>
+      <ion-input type="email" [(ngModel)]="email" clearInput></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>{{checkTel()}}</ion-label>
+      <ion-input type="tel" [(ngModel)]="tel" clearInput></ion-input>
+    </ion-item>
+  </ion-list>
+
+  <button ion-button block (click)="Register()">注 册</button>
+
+</ion-content>
