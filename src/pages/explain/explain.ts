@@ -52,7 +52,7 @@ export class ExplainPage {
         this.leftTitle = '愤怒';
         this.rightTitle = 'Anger';
         break;
-      case 'ye':
+      case 'yw':
         this.leftTitle = '厌恶';
         this.rightTitle = 'Disgust';
         break;

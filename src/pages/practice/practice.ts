@@ -13,7 +13,6 @@ import {FaceAttributes} from "../../entity/FaceAttributes";
 export class PracticePage {
   private imgSrc: string;
   private photoUrl: string;
-  private formData: FormData;
   private result: FaceAttributes;
 
   constructor(public navCtrl: NavController,
@@ -24,7 +23,6 @@ export class PracticePage {
   }
 
   ionViewDidLoad() {
-
   }
 
   /**
@@ -32,7 +30,7 @@ export class PracticePage {
    */
   openCamera() {
     const options: CameraOptions = {
-      quality: 20,                                                   //相片质量 0 -100
+      quality: 50,                                                   //相片质量 0 -100
       destinationType: this.camera.DestinationType.DATA_URL,        //DATA_URL 是 base64   FILE_URL 是文件路径
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE,
@@ -46,14 +44,11 @@ export class PracticePage {
       this.imgSrc = base64Image;
       // console.log("base64Image: " + base64Image);
 
-      // this.formData = new FormData();
-      // //convertBase64UrlToBlob函数是将base64编码转换为Blob
-      // //append函数的第一个参数是后台获取数据的参数名,和html标签的input的name属性功能相同
-      // this.formData.append("photo",this.convertBase64UrlToBlob(base64Image));
+      // dataURLtoBlob()函数是将base64编码转换为Blob
 
 
       //If it's file URI
-      // this.path = imageData;
+      // this.imgSrc = imageData;
 
 
       this.uploadFile(base64Image);
@@ -63,11 +58,11 @@ export class PracticePage {
     });
   }
 
-
   /**
    * 上传Url
    */
   uploadUrl() {
+    this.result = null;
     if (this.photoUrl === "") {
       alert('请输入需要识别的图片URL！');
       return;
@@ -77,7 +72,7 @@ export class PracticePage {
       .subscribe(
         data => {
           this.result = data[0].faceAttributes;
-          console.log(this.result);
+          // console.log(this.result);
         },
         error1 => {
           console.log(error1);
@@ -89,7 +84,8 @@ export class PracticePage {
    * 上传File
    */
   uploadFile(base64Image: string){
-    this.cognitiveService.CognitiveFile(this.convertBase64UrlToBlob(base64Image));
+    this.result = null;
+    this.cognitiveService.CognitiveFile(base64Image);
   }
 
   /**
@@ -102,35 +98,5 @@ export class PracticePage {
   }
 
 
-  /**
-   * 以base64的图片url数据转换为Blob
-   * @param urlData
-   * @returns {Blob}
-   */
-  convertBase64UrlToBlob(urlData) {
-    let bytes = window.atob(urlData.split(',')[1]);        //去掉url的头，并转换为byte
-
-    //处理异常,将ascii码小于0的转换为大于0
-    let ab = new ArrayBuffer(bytes.length);
-    let ia = new Uint8Array(ab);
-    for (let i = 0; i < bytes.length; i++) {
-      ia[i] = bytes.charCodeAt(i);
-    }
-    return new Blob([ab], {type: 'application/octet-stream'});
-  }
-
-  /**
-   * base64编码转换成二进制代码
-   * @param dataurl
-   * @returns {Blob}
-   */
-  dataURLtoBlob(dataurl) {
-    var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
-      bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
-    while(n--){
-      u8arr[n] = bstr.charCodeAt(n);
-    }
-    return new Blob([u8arr], {type: 'application/octet-stream'});
-  }
 
 }
