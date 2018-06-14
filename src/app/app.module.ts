@@ -19,6 +19,7 @@ import { CognitiveServiceProvider } from '../providers/cognitive-service/cogniti
 import {UserServiceProvider} from "../providers/user-service/user.service";
 import {Camera} from "@ionic-native/camera";
 import {IntroductionPage} from "../pages/introduction/introduction";
+import {ExplainPage} from "../pages/explain/explain";
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import {IntroductionPage} from "../pages/introduction/introduction";
     HomePage,
     LoginPage,
     RegisterPage,
-    IntroductionPage
+    IntroductionPage,
+    ExplainPage
   ],
   imports: [
     BrowserModule,
@@ -45,7 +47,8 @@ import {IntroductionPage} from "../pages/introduction/introduction";
     HomePage,
     LoginPage,
     RegisterPage,
-    IntroductionPage
+    IntroductionPage,
+    ExplainPage
   ],
   providers: [
     StatusBar,

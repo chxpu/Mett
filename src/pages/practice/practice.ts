@@ -32,7 +32,7 @@ export class PracticePage {
    */
   openCamera() {
     const options: CameraOptions = {
-      quality: 90,                                                   //相片质量 0 -100
+      quality: 20,                                                   //相片质量 0 -100
       destinationType: this.camera.DestinationType.DATA_URL,        //DATA_URL 是 base64   FILE_URL 是文件路径
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE,
@@ -41,23 +41,22 @@ export class PracticePage {
     };
 
     this.camera.getPicture(options).then((imageData) => {
-      console.log("got file: " + imageData);
-
       // If it's base64:
       let base64Image = 'data:image/jpeg;base64,' + imageData;
       this.imgSrc = base64Image;
-      console.log("base64Image: " + base64Image);
+      // console.log("base64Image: " + base64Image);
 
-      this.formData = new FormData();
-      //convertBase64UrlToBlob函数是将base64编码转换为Blob
-      //append函数的第一个参数是后台获取数据的参数名,和html标签的input的name属性功能相同
-      this.formData.append("photo",this.convertBase64UrlToBlob(base64Image));
+      // this.formData = new FormData();
+      // //convertBase64UrlToBlob函数是将base64编码转换为Blob
+      // //append函数的第一个参数是后台获取数据的参数名,和html标签的input的name属性功能相同
+      // this.formData.append("photo",this.convertBase64UrlToBlob(base64Image));
 
 
       //If it's file URI
       // this.path = imageData;
 
-      this.uploadFile();
+
+      this.uploadFile(base64Image);
 
     }, (err) => {
       // Handle error
@@ -89,8 +88,8 @@ export class PracticePage {
   /**
    * 上传File
    */
-  uploadFile(){
-
+  uploadFile(base64Image: string){
+    this.cognitiveService.CognitiveFile(this.convertBase64UrlToBlob(base64Image));
   }
 
   /**
@@ -117,8 +116,21 @@ export class PracticePage {
     for (let i = 0; i < bytes.length; i++) {
       ia[i] = bytes.charCodeAt(i);
     }
+    return new Blob([ab], {type: 'application/octet-stream'});
+  }
 
-    return new Blob([ab], {type: 'image/png'});
+  /**
+   * base64编码转换成二进制代码
+   * @param dataurl
+   * @returns {Blob}
+   */
+  dataURLtoBlob(dataurl) {
+    var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
+      bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
+    while(n--){
+      u8arr[n] = bstr.charCodeAt(n);
+    }
+    return new Blob([u8arr], {type: 'application/octet-stream'});
   }
 
 }
