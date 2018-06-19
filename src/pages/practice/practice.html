@@ -8,7 +8,7 @@
 
 
 <ion-content padding>
-  <div>
+  <div (click)="uploadFile(true)">
     <img [src]="imgSrc" />
   </div>
 
@@ -77,8 +77,8 @@
     </ion-item>
   </ion-list>
 
-  <button ion-button (click)="openCamera()">拍照识别</button>
-  <button ion-button (click)="uploadFile()">相册</button>
+  <button ion-button (click)="uploadFile(true)">拍照识别</button>
+  <button ion-button (click)="uploadFile(false)">相册</button>
   <button ion-button (click)="uploadUrl()">识别Url</button>
   <button ion-button (click)="clearNowData()">清空</button>
 </ion-content>

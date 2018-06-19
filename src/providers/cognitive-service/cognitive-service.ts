@@ -9,7 +9,7 @@ export class CognitiveServiceProvider {
 
   constructor(public http: HttpClient) {
     // console.log('Hello CognitiveServiceProvider Provider');
-    this.key = 'd8678645a47341e1bdb2659b9ad55672';
+      this.key = 'c093ad68cef643a68ae5792633c09688';
   }
 
 
@@ -20,7 +20,7 @@ export class CognitiveServiceProvider {
    * @constructor
    */
   CognitiveUrl(photoUrl: string) {
-    const CognitiveApiUrl = 'https://westcentralus.api.cognitive.microsoft.com/face/v1.0/detect?returnFaceId=true&returnFaceLandmarks=false&returnFaceAttributes=age,gender,emotion';
+    const CognitiveApiUrl = 'https://api.cognitive.azure.cn/face/v1.0/detect?returnFaceId=true&returnFaceLandmarks=false&returnFaceAttributes=age,gender,emotion';
     const CognitiveHttpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
@@ -39,24 +39,15 @@ export class CognitiveServiceProvider {
    * @constructor
    */
   CognitiveFile(dataURL: string) {
-    const CognitiveApiUrl = 'https://westcentralus.api.cognitive.microsoft.com/face/v1.0/detect?returnFaceId=true&returnFaceLandmarks=false&returnFaceAttributes=age,gender,emotion';
+    const CognitiveApiUrl = 'https://api.cognitive.azure.cn/face/v1.0/detect?returnFaceId=true&returnFaceLandmarks=false&returnFaceAttributes=age,gender,emotion';
     const CognitiveHttpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/octet-stream',
         'Ocp-Apim-Subscription-Key': this.key,
       }),
-      // 'processData': false,
     };
 
-    this.http.post<any>(CognitiveApiUrl, this.makeBlob(dataURL), CognitiveHttpOptions)
-      .subscribe(
-        data => {
-          console.log(data);
-        },
-        error1 => {
-          console.log(error1);
-        }
-      )
+    return this.http.post<any>(CognitiveApiUrl, this.dataURLtoBlob(dataURL), CognitiveHttpOptions)
   }
 
   /**
@@ -64,28 +55,17 @@ export class CognitiveServiceProvider {
    * @param {string} dataURL
    * @returns {Blob}
    */
-  makeBlob(dataURL: string) {
-    let BASE64_MARKER = ';base64,';
-    if (dataURL.indexOf(BASE64_MARKER) == -1) {
-      let parts = dataURL.split(',');
-      let contentType = parts[0].split(':')[1];
-      let raw = decodeURIComponent(parts[1]);
-      return new Blob([raw], { type: contentType });
+  dataURLtoBlob(dataurl: string) {
+    let arr = dataurl.split(','),
+      mime = arr[0].match(/:(.*?);/)[1],
+      bstr = atob(arr[1]),
+      n = bstr.length,
+      u8arr = new Uint8Array(n);
+    while (n--) {
+      u8arr[n] = bstr.charCodeAt(n);
     }
-    let parts = dataURL.split(BASE64_MARKER);
-    let contentType = parts[0].split(':')[1];
-    let raw = window.atob(parts[1]);
-    let rawLength = raw.length;
-
-    let uInt8Array = new Uint8Array(rawLength);
-
-    for (let i = 0; i < rawLength; ++i) {
-      uInt8Array[i] = raw.charCodeAt(i);
-    }
-    console.log(uInt8Array);
-    console.log(contentType);
-
-    return new Blob([uInt8Array], { type: contentType });
+    // console.log(u8arr);
+    return new Blob([u8arr], {type: mime} );
   }
 
 

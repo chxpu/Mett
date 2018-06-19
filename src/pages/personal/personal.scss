@@ -1,3 +1,35 @@
 page-personal {
-
+  background: #122232;
+  background-size: cover;
+  .content{
+    background: none;
+  }
+  .user-info{
+    display: flex;
+    padding-top: 10%;
+    padding-bottom: 5%;
+    flex-direction: column;
+    align-items: center;
+    .user-name{
+      font-size: 1.7rem;
+      color: #fff;
+      opacity: 0.6;
+      letter-spacing: 2px;
+    }
+    .user-avatar{
+      margin-bottom: 1%;
+    }
+  }
+  .list{
+    background: rgba(255,255,255,0.1);
+    .item{
+      color: #fff;
+      background: none;
+      opacity: 0.6;
+    }
+    //.note{
+    //  color: #fff;
+    //
+    //}
+  }
 }
