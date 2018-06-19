@@ -47,10 +47,14 @@ export class LoginPage {
     this.storage.get('isRemember').then((val) =>
       this.isRemember = val
     );
+
+    // 测试数据
+    this.username = 'admin';
+    this.password = '123456';
   }
 
   ionViewDidLoad() {
-    // 紧张屏幕旋转
+    // 禁止屏幕旋转
     this.screenOrientation.lock('portrait');
   }
 
@@ -98,6 +102,7 @@ export class LoginPage {
             }
             else {
               // 登录成功，更新userToken
+              this.userService.setUser(data.data);
               this.showToast(data.msg, 1500,'bottom','');
               this.app.getRootNav().setRoot(HomePage);
             }

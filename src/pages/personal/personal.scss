@@ -1,10 +1,11 @@
 page-personal {
-  background: #122232;
+  background: url("./../assets/imgs/personBackground.jpg") no-repeat;
+  //background: #122232;
   background-size: cover;
-  .content{
+  .content {
     background: none;
   }
-  .user-info{
+  .user-info {
     display: flex;
     padding-top: 10%;
     padding-bottom: 5%;
@@ -12,18 +13,18 @@ page-personal {
     align-items: center;
     .user-name{
       font-size: 1.7rem;
-      color: #fff;
+      color: #222222;
       opacity: 0.6;
       letter-spacing: 2px;
     }
-    .user-avatar{
+    .user-avatar {
       margin-bottom: 1%;
     }
   }
-  .list{
+  .list {
     background: rgba(255,255,255,0.1);
     .item{
-      color: #fff;
+      color: #222222;
       background: none;
       opacity: 0.6;
     }

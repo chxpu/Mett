@@ -99,12 +99,12 @@ export class RegisterPage {
    * 检查所有输入是否合格
    * @returns {boolean}
    */
-  checkAll(){
-    if (this.username==='用户名' &&
-      this.password==='密码' &&
-      this.confirmPassword==='确认密码' &&
-      this.email==='电子邮箱' &&
-      this.tel==='电话号码' ) {
+  checkAll() {
+    if (this.checkName()==='用户名' &&
+      this.checkPassword()==='密码' &&
+      this.checkConfirmPassword()==='确认密码' &&
+      this.checkEmail()==='电子邮箱' &&
+      this.checkTel()==='电话号码' ) {
       return true;
     }
     else {

@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import {PracticeReportPage} from "../practice-report/practice-report";
+import {UserServiceProvider} from "../../providers/user-service/user.service";
+import {User} from "../../entity/user";
 
 
 @Component({
@@ -8,12 +10,15 @@ import {PracticeReportPage} from "../practice-report/practice-report";
   templateUrl: 'personal.html',
 })
 export class PersonalPage {
+  private NowUser: User;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController,
+              public navParams: NavParams,
+              private userService: UserServiceProvider,) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad PersonalPage');
+    this.NowUser = this.userService.getUser();
   }
 
   /**
