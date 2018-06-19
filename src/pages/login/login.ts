@@ -60,8 +60,8 @@ export class LoginPage {
   login() {
     // 登录动画
     let loading = this.loadingCtrl.create({
-      spinner: 'dots',
-      content: '登录中'
+      spinner: 'circles',
+      content: '登录中...'
     });
     if(this.isRemember) {
       // 记住账号密码 写入本地

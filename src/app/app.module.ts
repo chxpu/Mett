@@ -20,6 +20,8 @@ import {UserServiceProvider} from "../providers/user-service/user.service";
 import {Camera} from "@ionic-native/camera";
 import {IntroductionPage} from "../pages/introduction/introduction";
 import {ExplainPage} from "../pages/explain/explain";
+import {PracticeReportPage} from "../pages/practice-report/practice-report";
+import {ComponentsModule} from "../components/components.module";
 
 
 @NgModule({
@@ -31,13 +33,15 @@ import {ExplainPage} from "../pages/explain/explain";
     LoginPage,
     RegisterPage,
     IntroductionPage,
-    ExplainPage
+    ExplainPage,
+    PracticeReportPage
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
     HttpClientModule,
     IonicStorageModule.forRoot(),
+    ComponentsModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -48,7 +52,8 @@ import {ExplainPage} from "../pages/explain/explain";
     LoginPage,
     RegisterPage,
     IntroductionPage,
-    ExplainPage
+    ExplainPage,
+    PracticeReportPage
   ],
   providers: [
     StatusBar,

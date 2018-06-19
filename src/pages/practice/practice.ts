@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {NavController, NavParams, ToastController} from 'ionic-angular';
+import {LoadingController, NavController, NavParams, ToastController} from 'ionic-angular';
 import {Camera, CameraOptions} from '@ionic-native/camera';
 import {CognitiveServiceProvider} from "../../providers/cognitive-service/cognitive-service";
 import {FaceAttributes} from "../../entity/FaceAttributes";
@@ -19,7 +19,8 @@ export class PracticePage {
               public navParams: NavParams,
               private camera: Camera,
               private cognitiveService: CognitiveServiceProvider,
-              private toastCtrl: ToastController,) {
+              private toastCtrl: ToastController,
+              public loadingCtrl: LoadingController) {
     this.clearNowData();
   }
 
@@ -31,6 +32,10 @@ export class PracticePage {
    * @param {boolean} sourceFlag true打开相机，false打开相册
    */
   uploadFile(sourceFlag: boolean) {
+    let loading = this.loadingCtrl.create({
+      spinner: 'bubbles',
+      content: '识别中...'
+    });
     this.photoUrl = '';
     let sourceType = this.camera.PictureSourceType.PHOTOLIBRARY;
     if (sourceFlag) {
@@ -56,17 +61,19 @@ export class PracticePage {
       // this.imgSrc = imageData;
 
       this.result = null;
+      loading.present();
       this.cognitiveService.CognitiveFile(base64Image)
         .subscribe(
           data => {
+            loading.dismiss();
             if (data.length == 0) {
-              this.imgSrc = "./assets/imgs/logo.png";
               this.showToast('未检测到人脸，请重试！', 2500, 'top','');
               return;
             }
             this.result = data[0].faceAttributes;
           },
           error1 => {
+            loading.dismiss();
             this.showToast('获取图片失败,请重试！', 2500, 'top','');
             console.log(error1);
           }
@@ -83,19 +90,26 @@ export class PracticePage {
    * 上传Url
    */
   uploadUrl() {
+    let loading = this.loadingCtrl.create({
+      spinner: 'bubbles',
+      content: '识别中...'
+    });
     this.result = null;
     if (this.photoUrl === "") {
       this.showToast('请输入需要识别的图片URL！', 2500, 'top','');
       return;
     }
     this.imgSrc = this.photoUrl;
+    loading.present();
     this.cognitiveService.CognitiveUrl(this.photoUrl)
       .subscribe(
         data => {
+          loading.dismiss();
           this.result = data[0].faceAttributes;
           // console.log(this.result);
         },
         error1 => {
+          loading.dismiss();
           console.log(error1);
         }
       )

@@ -77,8 +77,14 @@
     </ion-item>
   </ion-list>
 
-  <button ion-button (click)="uploadFile(true)">拍照识别</button>
-  <button ion-button (click)="uploadFile(false)">相册</button>
-  <button ion-button (click)="uploadUrl()">识别Url</button>
-  <button ion-button (click)="clearNowData()">清空</button>
+  <ion-fab right bottom >
+    <button ion-fab color="primary"><ion-icon name="arrow-dropleft"></ion-icon></button>
+    <ion-fab-list side="left">
+      <button ion-fab (click)="clearNowData()">清空</button>
+      <button ion-fab (click)="uploadUrl()">URL</button>
+      <button ion-fab (click)="uploadFile(false)">相册</button>
+      <button ion-fab (click)="uploadFile(true)">拍照</button>
+    </ion-fab-list>
+  </ion-fab>
+
 </ion-content>

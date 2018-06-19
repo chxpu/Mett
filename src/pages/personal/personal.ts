@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import {PracticeReportPage} from "../practice-report/practice-report";
 
 
 @Component({
@@ -13,6 +14,13 @@ export class PersonalPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad PersonalPage');
+  }
+
+  /**
+   * 练习报告页面
+   */
+  practiceReport() {
+    this.navCtrl.push(PracticeReportPage);
   }
 
 }
