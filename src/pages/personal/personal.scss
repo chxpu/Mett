@@ -12,6 +12,7 @@ page-personal {
     flex-direction: column;
     align-items: center;
     .user-name{
+      margin-top: 15px;
       font-size: 1.7rem;
       color: #222222;
       opacity: 0.6;
@@ -28,9 +29,5 @@ page-personal {
       background: none;
       opacity: 0.6;
     }
-    //.note{
-    //  color: #fff;
-    //
-    //}
   }
 }

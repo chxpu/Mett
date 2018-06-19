@@ -7,12 +7,12 @@
 <ion-content class="content">
   <div class="user-info">
     <div class="user-avatar">
-      <ion-img src="./assets/imgs/logo.png" width="100" height="100" style="border-radius: 50%"></ion-img>
+      <ion-img src="./assets/imgs/Applogo.png" width="100" height="100" style="border-radius: 50%"></ion-img>
     </div>
     <div class="user-name">{{ NowUser.username }}</div>
   </div>
   <ion-list>
-    <button ion-item (click)="practiceReport()">
+    <button ion-item (click)="goPracticeReport()">
       <ion-icon name="copy" item-start></ion-icon>
       练习报告
     </button>
@@ -28,7 +28,7 @@
       <ion-icon name="open" item-start></ion-icon>
       分享
     </button>
-    <button ion-item>
+    <button ion-item (click)="goAbout()">
       <ion-icon name="aperture" item-start></ion-icon>
       关于
     </button>

@@ -8,7 +8,6 @@ export class CognitiveServiceProvider {
   private key: string;
 
   constructor(public http: HttpClient) {
-    // console.log('Hello CognitiveServiceProvider Provider');
       this.key = 'c093ad68cef643a68ae5792633c09688';
   }
 
@@ -48,6 +47,14 @@ export class CognitiveServiceProvider {
     };
 
     return this.http.post<any>(CognitiveApiUrl, this.dataURLtoBlob(dataURL), CognitiveHttpOptions)
+  }
+
+  /**
+   * 上传每次训练的记录到后台
+   * @constructor
+   */
+  SaveRecord() {
+
   }
 
   /**

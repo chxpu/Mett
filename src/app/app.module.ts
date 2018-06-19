@@ -22,6 +22,8 @@ import {IntroductionPage} from "../pages/introduction/introduction";
 import {ExplainPage} from "../pages/explain/explain";
 import {PracticeReportPage} from "../pages/practice-report/practice-report";
 import {ComponentsModule} from "../components/components.module";
+import {AboutPage} from "../pages/about/about";
+import {TutorialPage} from "../pages/tutorial/tutorial";
 
 
 @NgModule({
@@ -34,7 +36,9 @@ import {ComponentsModule} from "../components/components.module";
     RegisterPage,
     IntroductionPage,
     ExplainPage,
-    PracticeReportPage
+    PracticeReportPage,
+    AboutPage,
+    TutorialPage
   ],
   imports: [
     BrowserModule,
@@ -53,7 +57,9 @@ import {ComponentsModule} from "../components/components.module";
     RegisterPage,
     IntroductionPage,
     ExplainPage,
-    PracticeReportPage
+    PracticeReportPage,
+    AboutPage,
+    TutorialPage
   ],
   providers: [
     StatusBar,

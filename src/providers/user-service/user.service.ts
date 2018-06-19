@@ -61,6 +61,7 @@ export class UserServiceProvider {
    * 设置当前用户信息
    */
   setUser(nowUser: User) {
+    console.log('setUser'+nowUser);
     this.NowUser = nowUser;
   }
 
@@ -68,6 +69,7 @@ export class UserServiceProvider {
    * 获取当前用户信息
    */
   getUser() {
+    console.log('getUser'+this.NowUser);
     return this.NowUser
   }
 

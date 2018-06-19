@@ -3,6 +3,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import {PracticeReportPage} from "../practice-report/practice-report";
 import {UserServiceProvider} from "../../providers/user-service/user.service";
 import {User} from "../../entity/user";
+import {AboutPage} from "../about/about";
 
 
 @Component({
@@ -15,17 +16,24 @@ export class PersonalPage {
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               private userService: UserServiceProvider,) {
+    this.NowUser = this.userService.getUser();
   }
 
   ionViewDidLoad() {
-    this.NowUser = this.userService.getUser();
   }
 
   /**
    * 练习报告页面
    */
-  practiceReport() {
+  goPracticeReport() {
     this.navCtrl.push(PracticeReportPage);
+  }
+
+  /**
+   * 打开关于我们页面
+   */
+  goAbout() {
+    this.navCtrl.push(AboutPage);
   }
 
 }
