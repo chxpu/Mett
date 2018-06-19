@@ -4,6 +4,9 @@ import {PracticeReportPage} from "../practice-report/practice-report";
 import {UserServiceProvider} from "../../providers/user-service/user.service";
 import {User} from "../../entity/user";
 import {AboutPage} from "../about/about";
+import {SharePage} from "../share/share";
+import {FeedbackPage} from "../feedback/feedback";
+import {PracticeAllTablePage} from "../practice-all-table/practice-all-table";
 
 
 @Component({
@@ -23,15 +26,24 @@ export class PersonalPage {
   }
 
   /**
-   * 练习报告页面
+   * 分别跳转到各个页面
    */
   goPracticeReport() {
     this.navCtrl.push(PracticeReportPage);
   }
 
-  /**
-   * 打开关于我们页面
-   */
+  goPracticeAllTable() {
+    this.navCtrl.push(PracticeAllTablePage);
+  }
+
+  goFeedback() {
+    this.navCtrl.push(FeedbackPage);
+  }
+
+  goShare() {
+    this.navCtrl.push(SharePage);
+  }
+
   goAbout() {
     this.navCtrl.push(AboutPage);
   }

@@ -24,6 +24,9 @@ import {PracticeReportPage} from "../pages/practice-report/practice-report";
 import {ComponentsModule} from "../components/components.module";
 import {AboutPage} from "../pages/about/about";
 import {TutorialPage} from "../pages/tutorial/tutorial";
+import {PracticeAllTablePage} from "../pages/practice-all-table/practice-all-table";
+import {FeedbackPage} from "../pages/feedback/feedback";
+import {SharePage} from "../pages/share/share";
 
 
 @NgModule({
@@ -38,7 +41,10 @@ import {TutorialPage} from "../pages/tutorial/tutorial";
     ExplainPage,
     PracticeReportPage,
     AboutPage,
-    TutorialPage
+    TutorialPage,
+    PracticeAllTablePage,
+    FeedbackPage,
+    SharePage
   ],
   imports: [
     BrowserModule,
@@ -59,7 +65,10 @@ import {TutorialPage} from "../pages/tutorial/tutorial";
     ExplainPage,
     PracticeReportPage,
     AboutPage,
-    TutorialPage
+    TutorialPage,
+    PracticeAllTablePage,
+    FeedbackPage,
+    SharePage
   ],
   providers: [
     StatusBar,

@@ -81,10 +81,10 @@ export class LoginPage {
     }
     // 判断数据合法性
     if(this.username.length == 0) {
-      this.showToast('请输入账号!', 2000, 'bottom','');
+      this.showToast('请输入账号!', 2000, 'top','');
     }
     else if(this.password.length == 0) {
-      this.showToast('请输入密码!', 2000, 'bottom','');
+      this.showToast('请输入密码!', 2000, 'top','');
     }
     else {
       loading.present();
@@ -94,22 +94,22 @@ export class LoginPage {
             loading.dismiss();
             if (data.code === 3) {
                 // 用户不存在
-                this.showToast(data.msg, 2500,'bottom','');
+                this.showToast(data.msg, 2500,'top','');
             }
             else if (data.code === 4) {
               // 密码错误
-              this.showToast(data.msg, 2500,'bottom','');
+              this.showToast(data.msg, 2500,'top','');
             }
             else {
               // 登录成功，更新userToken
               this.userService.setUser(data.data);
-              this.showToast(data.msg, 1500,'bottom','');
+              this.showToast(data.msg, 1500,'top','');
               this.app.getRootNav().setRoot(HomePage);
             }
           },
           error1 => {
             loading.dismiss();
-            this.showToast(error1.msg, 2000,'bottom','');
+            this.showToast(error1.msg, 2000,'top','');
           }
         );
     }
