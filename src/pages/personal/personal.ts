@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import {App, NavController, NavParams} from 'ionic-angular';
 import {PracticeReportPage} from "../practice-report/practice-report";
 import {UserServiceProvider} from "../../providers/user-service/user.service";
 import {User} from "../../entity/user";
@@ -7,6 +7,7 @@ import {AboutPage} from "../about/about";
 import {SharePage} from "../share/share";
 import {FeedbackPage} from "../feedback/feedback";
 import {PracticeAllTablePage} from "../practice-all-table/practice-all-table";
+import {LoginPage} from "../login/login";
 
 
 @Component({
@@ -18,7 +19,8 @@ export class PersonalPage {
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
-              private userService: UserServiceProvider,) {
+              private userService: UserServiceProvider,
+              private app: App) {
     this.NowUser = this.userService.getUser();
   }
 
@@ -42,6 +44,11 @@ export class PersonalPage {
 
   goShare() {
     this.navCtrl.push(SharePage);
+  }
+
+  logout() {
+    this.userService.setUser(null);
+    this.app.getRootNav().setRoot(LoginPage);
   }
 
   goAbout() {

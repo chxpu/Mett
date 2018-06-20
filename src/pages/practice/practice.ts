@@ -42,7 +42,7 @@ export class PracticePage {
       sourceType = this.camera.PictureSourceType.CAMERA
     }
     const options: CameraOptions = {
-      quality: 70,                                                   //相片质量 0 -100
+      quality: 80,                                                   //相片质量 0 - 100
       destinationType: this.camera.DestinationType.DATA_URL,        //DATA_URL 是 base64   FILE_URL 是文件路径
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE,
@@ -122,7 +122,7 @@ export class PracticePage {
   clearNowData() {
     this.result = null;
     this.imgSrc = "./assets/imgs/logo.png";
-    this.photoUrl = 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1529400706&di=94dc8156d94f1fc5d6e7175dcd139b03&imgtype=jpg&er=1&src=http%3A%2F%2Fimg2.bug.cn%2Fimages%2F2017%2F07%2F02%2F73d117603ae9c521ef28f633eba4ff65.jpg';
+    this.photoUrl = 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1648199628,421704929&fm=27&gp=0.jpg';
   }
 
 
@@ -141,7 +141,6 @@ export class PracticePage {
     });
     toast.present();
   }
-
 
 
 }
