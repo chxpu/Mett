@@ -1,0 +1,54 @@
+<ion-header no-border>
+  <ion-navbar transparent>
+    <ion-title>人脸相似度</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-card (click)="setPhoto(1)">
+    <img [src]="imgSrc_1"/>
+    <div class="card-title" *ngIf="imgSrc_1=='./assets/imgs/card-amsterdam.png'">点击拍照、打开相册</div>
+    <div class="card-subtitle" *ngIf="imgSrc_1=='./assets/imgs/card-amsterdam.png'">或者输入图片URL</div>
+  </ion-card>
+  <ion-card (click)="setPhoto(2)">
+    <img [src]="imgSrc_2" src="./assets/imgs/card-sf.png"/>
+    <div class="card-title" *ngIf="imgSrc_2=='./assets/imgs/card-sf.png'">点击拍照、打开相册</div>
+    <div class="card-subtitle" *ngIf="imgSrc_2=='./assets/imgs/card-sf.png'">或者输入图片URL</div>
+  </ion-card>
+
+  <ion-card *ngIf="result != null" style="margin-bottom: 50px">
+    <ion-card-header>
+      识别结果
+    </ion-card-header>
+    <ion-list>
+      <ion-item>
+        <ion-icon name="infinite" item-start></ion-icon>
+        相似度:
+        <ion-note item-end>{{result.length==0?0:result[0].confidence * 100}} %</ion-note>
+      </ion-item>
+    </ion-list>
+  </ion-card>
+
+  <ion-list *ngIf="result == null">
+    <ion-item>
+      <ion-label floating>图片1的URL</ion-label>
+      <ion-input type="text" [(ngModel)]="photoUrl_1" clearInput></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>图片2的URL</ion-label>
+      <ion-input type="text" [(ngModel)]="photoUrl_2" clearInput></ion-input>
+    </ion-item>
+  </ion-list>
+
+
+  <ion-fab right bottom >
+    <button ion-fab color="primary"><ion-icon name="arrow-dropleft"></ion-icon></button>
+    <ion-fab-list side="left">
+      <button ion-fab (click)="clearNowData()">清空</button>
+      <button ion-fab (click)="compare()">URL</button>
+      <button ion-fab (click)="compare()">照片</button>
+    </ion-fab-list>
+  </ion-fab>
+
+</ion-content>
+
