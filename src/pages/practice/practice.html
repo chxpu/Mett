@@ -2,18 +2,95 @@
   <ion-navbar transparent>
     <ion-title>表情测试</ion-title>
   </ion-navbar>
-
 </ion-header>
 
+<!--<ion-content>-->
+  <!--<button ion-button class="select-btn" (click)="show=true" color="{{show?'dark':'light'}}">情绪识别</button>-->
+  <!--<button ion-button class="select-btn" (click)="show=false" color="{{!show?'dark':'light'}}">相似度</button>-->
+<!--</ion-content>-->
 
 <ion-content padding>
-  <p>
-    <button ion-button class="select-btn" (click)="show=true" color="{{show?'dark':'light'}}" clear>情绪识别</button>
-    <button ion-button class="select-btn" (click)="show=false" color="{{!show?'dark':'light'}}" clear>相似度</button>
-  </p>
 
-  <emotion-test *ngIf="show"></emotion-test>
+  <ion-card (click)="uploadFile()">
+    <img [src]="imgSrc"/>
+    <div class="card-title" *ngIf="imgSrc=='./assets/imgs/card-amsterdam.png'">点击拍照、打开相册</div>
+    <div class="card-subtitle" *ngIf="imgSrc=='./assets/imgs/card-amsterdam.png'">或者输入图片URL</div>
+  </ion-card>
 
-  <similar *ngIf="!show"></similar>
+  <ion-card *ngIf="result != null">
+    <ion-card-header>
+      识别结果
+    </ion-card-header>
+    <ion-list>
+      <ion-item>
+        <ion-icon name="stopwatch" item-start></ion-icon>
+        年龄
+        <ion-note item-end>{{ result.age }}</ion-note>
+      </ion-item>
+      <ion-item>
+        <ion-icon name="{{result.gender=='female'?'woman':'man'}}" item-start></ion-icon>
+        性别
+        <ion-note item-end>{{ result.gender }}</ion-note>
+      </ion-item>
+      <ion-item>
+        <ion-icon name="pricetags" item-start></ion-icon>
+        愤怒
+        <ion-note item-end>{{ result.emotion.anger }}</ion-note>
+      </ion-item>
+      <ion-item>
+        <ion-icon name="pricetags" item-start></ion-icon>
+        蔑视
+        <ion-note item-end>{{ result.emotion.contempt }}</ion-note>
+      </ion-item>
+      <ion-item>
+        <ion-icon name="pricetags" item-start></ion-icon>
+        厌恶
+        <ion-note item-end>{{ result.emotion.disgust }}</ion-note>
+      </ion-item>
+      <ion-item>
+        <ion-icon name="pricetags" item-start></ion-icon>
+        恐惧
+        <ion-note item-end>{{ result.emotion.fear }}</ion-note>
+      </ion-item>
+      <ion-item>
+        <ion-icon name="pricetags" item-start></ion-icon>
+        高兴
+        <ion-note item-end>{{ result.emotion.happiness }}</ion-note>
+      </ion-item>
+      <ion-item>
+        <ion-icon name="pricetags" item-start></ion-icon>
+        中立
+        <ion-note item-end>{{ result.emotion.neutral }}</ion-note>
+      </ion-item>
+      <ion-item>
+        <ion-icon name="pricetags" item-start></ion-icon>
+        悲伤
+        <ion-note item-end>{{ result.emotion.sadness }}</ion-note>
+      </ion-item>
+      <ion-item>
+        <ion-icon name="pricetags" item-start></ion-icon>
+        惊讶
+        <ion-note item-end>{{ result.emotion.surprise }}</ion-note>
+      </ion-item>
+    </ion-list>
+
+  </ion-card>
+
+  <ion-list *ngIf="result == null">
+    <ion-item>
+      <ion-label floating>图片URL</ion-label>
+      <ion-input type="text" [(ngModel)]="photoUrl" clearInput></ion-input>
+    </ion-item>
+  </ion-list>
+
+  <ion-fab right bottom >
+    <button ion-fab color="primary"><ion-icon name="arrow-dropleft"></ion-icon></button>
+    <ion-fab-list side="left">
+      <button ion-fab (click)="clearNowData()">清空</button>
+      <button ion-fab (click)="uploadUrl()">URL</button>
+      <!--<button ion-fab (click)="uploadFile(false)">相册</button>-->
+      <button ion-fab (click)="uploadFile()">图片</button>
+    </ion-fab-list>
+  </ion-fab>
 
 </ion-content>

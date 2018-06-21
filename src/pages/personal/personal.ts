@@ -8,6 +8,7 @@ import {SharePage} from "../share/share";
 import {FeedbackPage} from "../feedback/feedback";
 import {PracticeAllTablePage} from "../practice-all-table/practice-all-table";
 import {LoginPage} from "../login/login";
+import {SimilarPage} from "../similar/similar";
 
 
 @Component({
@@ -36,6 +37,10 @@ export class PersonalPage {
 
   goPracticeAllTable() {
     this.navCtrl.push(PracticeAllTablePage);
+  }
+
+  goSimilar() {
+    this.navCtrl.push(SimilarPage);
   }
 
   goFeedback() {

@@ -26,7 +26,8 @@ import {AboutPage} from "../pages/about/about";
 import {TutorialPage} from "../pages/tutorial/tutorial";
 import {PracticeAllTablePage} from "../pages/practice-all-table/practice-all-table";
 import {FeedbackPage} from "../pages/feedback/feedback";
-import {SharePage} from "../pages/share/share";
+import {SharePage} from "../pages/share/share"
+import {SimilarPage} from "../pages/similar/similar";
 
 
 @NgModule({
@@ -44,7 +45,8 @@ import {SharePage} from "../pages/share/share";
     TutorialPage,
     PracticeAllTablePage,
     FeedbackPage,
-    SharePage
+    SharePage,
+    SimilarPage
   ],
   imports: [
     BrowserModule,
@@ -68,7 +70,8 @@ import {SharePage} from "../pages/share/share";
     TutorialPage,
     PracticeAllTablePage,
     FeedbackPage,
-    SharePage
+    SharePage,
+    SimilarPage
   ],
   providers: [
     StatusBar,

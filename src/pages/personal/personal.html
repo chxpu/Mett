@@ -9,7 +9,7 @@
     <div class="user-avatar">
       <ion-img src="./assets/imgs/Applogo.png" width="100" height="100" style="border-radius: 50%"></ion-img>
     </div>
-    <div class="user-name">{{ NowUser.username }}</div>
+    <div class="user-name">{{ NowUser==null?'未登录':NowUser.username }}</div>
   </div>
   <ion-list>
     <button ion-item (click)="goPracticeReport()">
@@ -19,6 +19,10 @@
     <button ion-item (click)="goPracticeAllTable()">
       <ion-icon name="list-box" item-start></ion-icon>
       测试统计报表
+    </button>
+    <button ion-item (click)="goSimilar()">
+      <ion-icon name="paper-plane" item-start></ion-icon>
+      人脸相似度
     </button>
     <button ion-item (click)="goFeedback()">
       <ion-icon name="paper-plane" item-start></ion-icon>

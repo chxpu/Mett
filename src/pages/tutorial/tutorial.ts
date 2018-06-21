@@ -4,6 +4,7 @@ import {App, MenuController, NavController, Slides} from 'ionic-angular';
 
 import { Storage } from '@ionic/storage';
 import {LoginPage} from "../login/login";
+import {HomePage} from "../home/home";
 
 
 @Component({
@@ -24,7 +25,7 @@ export class TutorialPage {
   ) { }
 
   startApp() {
-    this.app.getRootNav().setRoot(LoginPage).then(() => {
+    this.app.getRootNav().setRoot(HomePage).then(() => {
       this.storage.set('hasSeenTutorial', 'true');
     })
   }
