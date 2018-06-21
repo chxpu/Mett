@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {LoadingController, NavController, NavParams, ToastController} from 'ionic-angular';
+import {AlertController, LoadingController, NavController, NavParams, ToastController} from 'ionic-angular';
 import {FaceAttributes} from "../../entity/FaceAttributes";
 import {CognitiveServiceProvider} from "../../providers/cognitive-service/cognitive-service";
 import {Camera, CameraOptions} from "@ionic-native/camera";
@@ -20,7 +20,8 @@ export class PracticePage {
               private camera: Camera,
               private cognitiveService: CognitiveServiceProvider,
               private toastCtrl: ToastController,
-              public loadingCtrl: LoadingController) {
+              public loadingCtrl: LoadingController,
+              public alerCtrl: AlertController) {
     this.clearNowData();
   }
 
@@ -28,17 +29,38 @@ export class PracticePage {
   }
 
   /**
-   * 识别文件
+   * 上传图片文件并识别
    */
   uploadFile() {
-    let sourceFlag: boolean;
-    // 选择获取图片方式，sourceFlag true打开相机，false打开相册
+    let confirm = this.alerCtrl.create({
+      title: '获取图片',
+      message: '你需要从手机相册中选择图片还是打开相机拍照?',
+      buttons: [{
+          text: '手机相册',
+          handler: () => {
+            this.getPhoto(false);
+          }
+        }, {
+          text: '拍照',
+          handler: () => {
+            this.getPhoto(true);
+          }
+        }
+      ]
+    });
+    confirm.present();
+  }
 
+  /**
+   * 从手机相册或者拍照获取图片url并上传
+   * @param {boolean} sourceFlag sourceFlag true打开相机，false打开相册
+   */
+  getPhoto(sourceFlag: boolean) {
+    this.photoUrl = '';
     let loading = this.loadingCtrl.create({
       spinner: 'bubbles',
       content: '识别中...'
     });
-    this.photoUrl = '';
     let sourceType = this.camera.PictureSourceType.PHOTOLIBRARY;
     if (sourceFlag) {
       sourceType = this.camera.PictureSourceType.CAMERA
@@ -52,41 +74,39 @@ export class PracticePage {
       sourceType: sourceType ,         //是打开相机拍照还是打开相册选择  PHOTOLIBRARY : 相册选择, CAMERA : 拍照,
       correctOrientation: true                                      // 固定照片的方向
     };
-
     this.camera.getPicture(options).then((imageData) => {
       // If it's base64:
       let base64Image = 'data:image/jpeg;base64,' + imageData;
       this.imgSrc = base64Image;
       // console.log("base64Image: " + base64Image);
-
       //If it's file URI
       // this.imgSrc = imageData;
 
       this.result = null;
       loading.present();
       this.cognitiveService.CognitiveFile(base64Image)
-        .subscribe(
-          data => {
-            loading.dismiss();
-            if (data.length == 0) {
-              this.showToast('未检测到人脸，请重试！', 2500, 'top','');
-              return;
-            }
-            this.result = data[0].faceAttributes;
-          },
-          error1 => {
-            loading.dismiss();
-            this.showToast('获取图片失败,请重试！', 2500, 'top','');
-            console.log(error1);
+      .subscribe(
+        data => {
+          loading.dismiss();
+          if (data.length == 0) {
+            this.showToast('未检测到人脸，请重试！', 2500, 'top','');
+            return;
           }
-        )
+          this.result = data[0].faceAttributes;
+      },
+        error1 => {
+          loading.dismiss();
+          this.showToast('获取图片失败,请重试！', 2500, 'top','');
+          console.log(error1);
+        }
+      )
     }, (err) => {
-      // Handle error
-    });
-  }
+          // Handle error
+      });
+}
 
-  /**
-   * 上传Url
+/**
+   * 上传图片URL并识别
    */
   uploadUrl() {
     let loading = this.loadingCtrl.create({

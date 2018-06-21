@@ -1,6 +1,6 @@
 import {FaceAttributes} from "./FaceAttributes";
 
-export class ResponseData {
+export class DetectResponseData {
   faceId: string;
   faceRectangle: {
     top: number;

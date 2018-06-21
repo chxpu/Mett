@@ -1,6 +1,7 @@
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import {ResponseData} from "../../entity/ResponseData";
+import {DetectResponseData} from "../../entity/DetectResponseData";
+import {SimilarResponseData} from "../../entity/SimilarResponseData";
 
 
 @Injectable()
@@ -15,7 +16,7 @@ export class CognitiveServiceProvider {
   /**
    * 上传图片url，调用认知服务
    * @param {string} photoUrl
-   * @returns {Observable<ResponseData>}
+   * @returns {Observable<DetectResponseData>}
    * @constructor
    */
   CognitiveUrl(photoUrl: string) {
@@ -29,7 +30,7 @@ export class CognitiveServiceProvider {
     let CognitiveBody = {
       'url': photoUrl
     };
-    return this.http.post<ResponseData>(CognitiveApiUrl, CognitiveBody, CognitiveHttpOptions)
+    return this.http.post<DetectResponseData>(CognitiveApiUrl, CognitiveBody, CognitiveHttpOptions)
   }
 
   /**
@@ -45,17 +46,39 @@ export class CognitiveServiceProvider {
         'Ocp-Apim-Subscription-Key': this.key,
       }),
     };
-
     return this.http.post<any>(CognitiveApiUrl, this.dataURLtoBlob(dataURL), CognitiveHttpOptions)
   }
+
+
+  /**
+   * 调用Azure认知服务-检测人脸相似度API
+   * @param {string} faceId
+   * @param {string} faceIds
+   * @returns {Observable<Array<SimilarResponseData>>}
+   */
+  findSimilar(faceId: string, faceIds: string) {
+    const similarUrl = 'https://api.cognitive.azure.cn/face/v1.0/findsimilars';
+    const similarHttpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Ocp-Apim-Subscription-Key': this.key,
+      }),
+    };
+    let similarBody = {
+      "faceId": faceId,
+      "faceIds": [faceIds]
+    };
+    return this.http.post<Array<SimilarResponseData>>(similarUrl, similarBody, similarHttpOptions);
+  }
+
 
   /**
    * 上传每次训练的记录到后台
    * @constructor
    */
   SaveRecord() {
-
   }
+
 
   /**
    * base64编码转换成Blob二进制代码
