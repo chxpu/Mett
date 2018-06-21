@@ -1,0 +1,22 @@
+<div>
+  <ion-card (click)="setPhoto(1)">
+    <img src="./assets/imgs/card-amsterdam.png"/>
+    <div class="card-title">Amsterdam</div>
+    <div class="card-subtitle">64 Listings</div>
+  </ion-card>
+
+  <ion-card (click)="setPhoto(1)">
+    <img src="./assets/imgs/card-sf.png"/>
+    <div class="card-title">San Francisco</div>
+    <div class="card-subtitle">72 Listings</div>
+  </ion-card>
+
+  <ion-fab right bottom >
+    <button ion-fab color="primary"><ion-icon name="arrow-dropleft"></ion-icon></button>
+    <ion-fab-list side="left">
+      <!--<button ion-fab (click)="clearNowData()">清空</button>-->
+      <!--<button ion-fab (click)="uploadUrl()">URL</button>-->
+      <!--<button ion-fab (click)="uploadFile(true)">对比</button>-->
+    </ion-fab-list>
+  </ion-fab>
+</div>

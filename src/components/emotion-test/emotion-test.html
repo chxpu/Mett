@@ -1,0 +1,79 @@
+<div (click)="uploadFile(true)">
+  <img [src]="imgSrc" />
+</div>
+
+<ion-card *ngIf="result != null">
+  <ion-card-header>
+  识别结果
+  </ion-card-header>
+  <ion-list>
+    <ion-item>
+      <ion-icon name="stopwatch" item-start></ion-icon>
+      年龄
+      <ion-note item-end>{{ result.age }}</ion-note>
+    </ion-item>
+    <ion-item>
+      <ion-icon name="{{result.gender=='female'?'woman':'man'}}" item-start></ion-icon>
+      性别
+      <ion-note item-end>{{ result.gender }}</ion-note>
+    </ion-item>
+    <ion-item>
+      <ion-icon name="pricetags" item-start></ion-icon>
+      愤怒
+      <ion-note item-end>{{ result.emotion.anger }}</ion-note>
+    </ion-item>
+    <ion-item>
+      <ion-icon name="pricetags" item-start></ion-icon>
+      蔑视
+      <ion-note item-end>{{ result.emotion.contempt }}</ion-note>
+    </ion-item>
+    <ion-item>
+      <ion-icon name="pricetags" item-start></ion-icon>
+      厌恶
+      <ion-note item-end>{{ result.emotion.disgust }}</ion-note>
+    </ion-item>
+    <ion-item>
+      <ion-icon name="pricetags" item-start></ion-icon>
+      恐惧
+      <ion-note item-end>{{ result.emotion.fear }}</ion-note>
+    </ion-item>
+    <ion-item>
+      <ion-icon name="pricetags" item-start></ion-icon>
+      高兴
+      <ion-note item-end>{{ result.emotion.happiness }}</ion-note>
+    </ion-item>
+    <ion-item>
+      <ion-icon name="pricetags" item-start></ion-icon>
+      中立
+      <ion-note item-end>{{ result.emotion.neutral }}</ion-note>
+    </ion-item>
+    <ion-item>
+      <ion-icon name="pricetags" item-start></ion-icon>
+      悲伤
+      <ion-note item-end>{{ result.emotion.sadness }}</ion-note>
+    </ion-item>
+    <ion-item>
+      <ion-icon name="pricetags" item-start></ion-icon>
+      惊讶
+      <ion-note item-end>{{ result.emotion.surprise }}</ion-note>
+    </ion-item>
+  </ion-list>
+
+</ion-card>
+<ion-list>
+  <ion-item>
+    <ion-label floating>图片URL</ion-label>
+    <ion-input type="text" [(ngModel)]="photoUrl" clearInput></ion-input>
+  </ion-item>
+</ion-list>
+
+<ion-fab right bottom >
+  <button ion-fab color="primary"><ion-icon name="arrow-dropleft"></ion-icon></button>
+  <ion-fab-list side="left">
+    <button ion-fab (click)="clearNowData()">清空</button>
+    <button ion-fab (click)="uploadUrl()">URL</button>
+    <button ion-fab (click)="uploadFile(false)">相册</button>
+    <button ion-fab (click)="uploadFile(true)">拍照</button>
+  </ion-fab-list>
+</ion-fab>
+

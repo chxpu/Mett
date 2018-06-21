@@ -1,0 +1,14 @@
+<ion-header  no-border>
+  <ion-navbar transparent>
+    <ion-title>练习报告</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+
+  <div *ngFor="let item of FaceAttributesData">
+    <report-data [FaceAttributesDataItem]="item"></report-data>
+  </div>
+
+</ion-content>

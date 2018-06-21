@@ -1,0 +1,46 @@
+<ion-header no-border>
+  <ion-navbar>
+    <ion-buttons end *ngIf="showSkip">
+      <button ion-button (click)="startApp()" color="primary">跳过</button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content no-bounce>
+  <ion-slides #slides (ionSlideWillChange)="onSlideChangeStart($event)" pager loop="false" autoplay="1800">
+
+    <ion-slide>
+      <h3 class="slide-title">
+        Welcome to <b>Mett</b>
+      </h3>
+      <img src="./assets/imgs/ica-slidebox-img-1.jpg" class="slide-image"/>
+      <h1 class="slide-title">
+        <b>基本表情详细介绍</b>
+      </h1>
+      <p><b>Mett</b>带你了解微表情背后的大学问</p>
+    </ion-slide>
+
+    <ion-slide>
+      <img src="./assets/imgs/ica-slidebox-img-2.jpg" class="slide-image"/>
+      <h2 class="slide-title" >测试环节</h2>
+      <p><b>Mett</b>带你从易到难把控个人微表情</p>
+    </ion-slide>
+
+    <ion-slide>
+      <img src="./assets/imgs/ica-slidebox-img-3.jpg" class="slide-image"/>
+      <h2 class="slide-title">查看记录</h2>
+      <p>查看训练记录</p>
+    </ion-slide>
+
+    <ion-slide>
+      <img src="./assets/imgs/ica-slidebox-img-4.jpg" class="slide-image"/>
+      <h2 class="slide-title">“Mett”</h2>
+      <p>遇见更好的自己~</p>
+      <button ion-button icon-end large clear (click)="startApp()">
+        开始体验
+        <ion-icon name="arrow-forward"></ion-icon>
+      </button>
+    </ion-slide>
+
+  </ion-slides>
+</ion-content>

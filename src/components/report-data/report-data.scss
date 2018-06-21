@@ -1,0 +1,47 @@
+report-data {
+  .container {
+    width: 90%;
+    margin: 17px auto;
+    .title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-left: 1px solid #5B5B5B;
+      border-right: 1px solid #5B5B5B;
+      border-top: 1px solid #5B6268;
+      height: 4rem;
+    }
+    .score {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      border-left: 1px solid #5B5B5B;
+      border-right: 1px solid #5B5B5B;
+      border-top: 1px solid #5B6268;
+      height: 4rem;
+    }
+    .details{
+      display: flex;
+      flex-wrap: wrap;
+      b {
+        text-align: center;
+        width: 50%;
+        border: 1px solid #5B5B5B;
+        font-size: 1.2rem;
+      }
+    }
+    .details b:nth-child(odd){
+      border-right: none;
+    }
+    .details b:nth-child(-n+6){
+      border-bottom: none;
+    }
+    b {
+      display: flex;
+      align-items: center;
+      height: 2.5rem;
+      justify-content: center;
+    }
+
+  }
+}
