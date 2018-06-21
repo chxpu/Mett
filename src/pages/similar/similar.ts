@@ -36,19 +36,19 @@ export class SimilarPage {
    * 设置图片，1为上面，2为下面的第二张
    * @param {number} Num
    */
-  setPhoto(Num: number) {
+  setfaceIDByFile(Num: number) {
     let confirm = this.alerCtrl.create({
       title: '获取图片',
       message: '你需要从手机相册中选择图片还是打开相机拍照?',
       buttons: [{
           text: '手机相册',
           handler: () => {
-            this.getPhoto(Num, false);
+            this.getLocalPhoto(Num, false);
           }
         }, {
           text: '拍照',
           handler: () => {
-            this.getPhoto(Num, true);
+            this.getLocalPhoto(Num, true);
           }
         }
       ]
@@ -57,11 +57,56 @@ export class SimilarPage {
   }
 
   /**
+   *input失去焦点时触发，上传URL，并设置其faceId
+   */
+  setfaceIDByUrl(Num: number) {
+      if (Num == 1) {
+        if (this.photoUrl_1 == '') {
+          return;
+        }
+        this.imgSrc_1 = this.photoUrl_1;
+        this.cognitiveService.CognitiveUrl(this.photoUrl_1)
+          .subscribe(
+            data => {
+              this.faceId_1 = data[0].faceId;
+              if (this.faceId_2 != '') {
+                this.compare();
+              }
+            },
+            error1 => {
+              console.log(error1);
+            }
+          );
+      }
+      else {
+        if (this.photoUrl_2 == '') {
+          return;
+        }
+        this.imgSrc_2 = this.photoUrl_2;
+        this.cognitiveService.CognitiveUrl(this.photoUrl_2)
+          .subscribe(
+            data => {
+              this.faceId_2 = data[0].faceId;
+              if (this.faceId_1 != '') {
+                this.compare();
+              }
+            },
+            error1 => {
+              console.log(error1);
+            }
+          );
+      }
+
+    }
+
+
+
+  /**
    * 从手机相册或者拍照获取图片url并上传，将返回的faceId进行赋值
    * @param {number} Num 设置图片，1为上面，2为下面的第二张
    * @param {boolean} sourceFlag sourceFlag true打开相机，false打开相册
    */
-  getPhoto(Num: number, sourceFlag: boolean) {
+  getLocalPhoto(Num: number, sourceFlag: boolean) {
     let sourceType = this.camera.PictureSourceType.PHOTOLIBRARY;
     if (sourceFlag) {
       sourceType = this.camera.PictureSourceType.CAMERA
@@ -80,9 +125,11 @@ export class SimilarPage {
       let base64Image = 'data:image/jpeg;base64,' + imageData;
       if (Num === 1) {
         this.imgSrc_1 = base64Image;
+        this.photoUrl_1 = '';
       }
       if (Num === 2) {
         this.imgSrc_2 = base64Image;
+        this.photoUrl_2 = '';
       }
       // console.log("base64Image: " + base64Image);
       //If it's file URI
@@ -125,6 +172,8 @@ export class SimilarPage {
   clearNowData() {
     this.imgSrc_1 = './assets/imgs/card-amsterdam.png';
     this.imgSrc_2 = './assets/imgs/card-sf.png';
+    this.photoUrl_1 = '';
+    this.photoUrl_2 = '';
     this.faceId_1 = '';
     this.faceId_2 = '';
     this.result = null;
@@ -146,7 +195,6 @@ export class SimilarPage {
       spinner: 'bubbles',
       content: '识别中...'
     });
-    loading.present();
     this.cognitiveService.findSimilar(this.faceId_2, this.faceId_1)
       .subscribe(
         (data) =>{

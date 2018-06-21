@@ -4,19 +4,31 @@
   </ion-navbar>
 </ion-header>
 
+
 <ion-content padding>
-  <ion-card (click)="setPhoto(1)">
+  <ion-card (click)="setfaceIDByFile(1)">
     <img [src]="imgSrc_1"/>
     <div class="card-title" *ngIf="imgSrc_1=='./assets/imgs/card-amsterdam.png'">点击拍照、打开相册</div>
     <div class="card-subtitle" *ngIf="imgSrc_1=='./assets/imgs/card-amsterdam.png'">或者输入图片URL</div>
   </ion-card>
-  <ion-card (click)="setPhoto(2)">
+  <ion-card (click)="setfaceIDByFile(2)">
     <img [src]="imgSrc_2" src="./assets/imgs/card-sf.png"/>
     <div class="card-title" *ngIf="imgSrc_2=='./assets/imgs/card-sf.png'">点击拍照、打开相册</div>
     <div class="card-subtitle" *ngIf="imgSrc_2=='./assets/imgs/card-sf.png'">或者输入图片URL</div>
   </ion-card>
 
-  <ion-card *ngIf="result != null" style="margin-bottom: 50px">
+  <ion-list *ngIf=" result==null || faceId_1!='' || faceId_2!='' ">
+    <ion-item>
+      <ion-label floating>图片1的URL</ion-label>
+      <ion-input type="text" (ionBlur)="setfaceIDByUrl(1)" [(ngModel)]="photoUrl_1" clearInput></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>图片2的URL</ion-label>
+      <ion-input type="text" (ionBlur)="setfaceIDByUrl(2)" [(ngModel)]="photoUrl_2" clearInput></ion-input>
+    </ion-item>
+  </ion-list>
+
+  <ion-card *ngIf="result != null" style="margin-bottom: 60px">
     <ion-card-header>
       识别结果
     </ion-card-header>
@@ -28,18 +40,6 @@
       </ion-item>
     </ion-list>
   </ion-card>
-
-  <ion-list *ngIf="result == null">
-    <ion-item>
-      <ion-label floating>图片1的URL</ion-label>
-      <ion-input type="text" [(ngModel)]="photoUrl_1" clearInput></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label floating>图片2的URL</ion-label>
-      <ion-input type="text" [(ngModel)]="photoUrl_2" clearInput></ion-input>
-    </ion-item>
-  </ion-list>
-
 
   <ion-fab right bottom >
     <button ion-fab color="primary"><ion-icon name="arrow-dropleft"></ion-icon></button>
