@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {App, NavController, NavParams} from 'ionic-angular';
+import {AlertController, App, NavController, NavParams} from 'ionic-angular';
 import {PracticeReportPage} from "../practice-report/practice-report";
 import {UserServiceProvider} from "../../providers/user-service/user.service";
 import {User} from "../../entity/user";
@@ -21,7 +21,8 @@ export class PersonalPage {
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               private userService: UserServiceProvider,
-              private app: App) {
+              private app: App,
+              private alerCtrl: AlertController) {
     this.NowUser = this.userService.getUser();
   }
 
@@ -52,8 +53,24 @@ export class PersonalPage {
   }
 
   logout() {
-    this.userService.setUser(null);
-    this.app.getRootNav().setRoot(LoginPage);
+    let confirm = this.alerCtrl.create({
+      title: '提示',
+      message: '是否退出登录?',
+      buttons: [{
+        text: '确定',
+        handler: () => {
+          this.userService.setUser(null);
+          this.app.getRootNav().setRoot(LoginPage);
+        }
+      }, {
+        text: '取消',
+        handler: () => {
+          return;
+        }
+      }
+      ]
+    });
+    confirm.present();
   }
 
   goAbout() {
