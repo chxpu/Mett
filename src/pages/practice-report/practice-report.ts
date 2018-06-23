@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
-import {FaceAttributes} from "../../entity/FaceAttributes";
-
+import {LoadingController, NavController, NavParams} from 'ionic-angular';
+import {getReportResponseData} from "../../entity/getReportResponseData";
+import {UserServiceProvider} from "../../providers/user-service/user.service";
+import {PracticePage} from "../practice/practice";
 
 
 @Component({
@@ -9,42 +10,43 @@ import {FaceAttributes} from "../../entity/FaceAttributes";
   templateUrl: 'practice-report.html',
 })
 export class PracticeReportPage {
-  private FaceAttributesData: Array<FaceAttributes>;
+  private FaceAttributesData: Array<getReportResponseData>;
+  private isShowCard = false;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController,
+              public navParams: NavParams,
+              private userService: UserServiceProvider,
+              private loadingCtrl: LoadingController) {
+    let loading = this.loadingCtrl.create({
+      spinner: 'bubbles',
+      content: '加载中...'
+    });
+    loading.present();
+    // 从服务器获取数据
+    this.userService.getReport()
+      .subscribe(
+        (data) => {
+          this.FaceAttributesData = data.data;
+          if (this.FaceAttributesData.length == 0) {
+            this.isShowCard = true;
+          }
+          loading.dismiss();
+        },
+        (error1) => {
+          console.log(error1);
+        }
+      )
+
   }
 
   ionViewDidLoad() {
-    this.FaceAttributesData = [
-      {
-        "gender": "male",
-        "age": 22,
-        "emotion": {
-          "anger": 0,
-          "contempt": 0,
-          "disgust": 0,
-          "fear": 0,
-          "happiness": 0.986,
-          "neutral": 0,
-          "sadness": 0.014,
-          "surprise": 0
-        }
-      },
-      {
-        "gender": "male",
-        "age": 22,
-        "emotion": {
-          "anger": 0,
-          "contempt": 0,
-          "disgust": 0,
-          "fear": 0,
-          "happiness": 0.986,
-          "neutral": 0,
-          "sadness": 0.014,
-          "surprise": 0
-        }
-      }
-    ]
+  }
+
+  /**
+   * 练习
+   */
+  goPractice() {
+    this.navCtrl.push(PracticePage);
   }
 
 }

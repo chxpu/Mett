@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {FaceAttributes} from "../../entity/FaceAttributes";
+import {getReportResponseData} from "../../entity/getReportResponseData";
 
 
 @Component({
@@ -8,14 +8,13 @@ import {FaceAttributes} from "../../entity/FaceAttributes";
   inputs: ['FaceAttributesDataItem']
 })
 export class ReportDataComponent {
-  private FaceAttributesDataItem: FaceAttributes;
-  private title1: string;
-  private title2: string;
-  private score: number;
-
+  private FaceAttributesDataItem: getReportResponseData;
 
   constructor() {
-    this.score = 95.89;
+  }
+
+  deleteReport() {
+
   }
 
 }

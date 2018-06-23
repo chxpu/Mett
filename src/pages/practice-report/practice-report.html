@@ -7,6 +7,27 @@
 
 <ion-content>
 
+  <ion-card *ngIf="isShowCard">
+    <img src="./assets/imgs/card-amsterdam.png"/>
+    <ion-card-content>
+      <ion-card-title>
+        温馨提示
+      </ion-card-title>
+      <p>
+        您当前还没有表情训练记录,请先进行表情测试。
+      </p>
+    </ion-card-content>
+    <ion-row no-padding>
+      <ion-col text-right>
+        <button ion-button clear small color="danger" (click)="goPractice()" icon-start>
+          <ion-icon name='share-alt'></ion-icon>
+          去训练
+        </button>
+      </ion-col>
+    </ion-row>
+  </ion-card>
+
+
   <div *ngFor="let item of FaceAttributesData">
     <report-data [FaceAttributesDataItem]="item"></report-data>
   </div>

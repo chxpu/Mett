@@ -41,7 +41,10 @@ export class RegisterPage {
     }
     this.userService.Register(this.username, this.password, this.email,this.tel)
       .subscribe(data =>{
-          if (data.code === 2) {
+          if (data.code === 0) {
+            this.showToast('用户名已存在，请重试！', 2000,'top','');
+          }
+          else if (data.code === 2) {
             this.showToast('注册成功，请登录！', 2000,'top','');
             this.app.getRootNav().setRoot(LoginPage);
           }

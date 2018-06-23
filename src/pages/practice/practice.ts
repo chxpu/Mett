@@ -3,6 +3,7 @@ import {AlertController, LoadingController, NavController, NavParams, ToastContr
 import {FaceAttributes} from "../../entity/FaceAttributes";
 import {CognitiveServiceProvider} from "../../providers/cognitive-service/cognitive-service";
 import {Camera, CameraOptions} from "@ionic-native/camera";
+import {UserServiceProvider} from "../../providers/user-service/user.service";
 
 
 @Component({
@@ -21,7 +22,8 @@ export class PracticePage {
               private cognitiveService: CognitiveServiceProvider,
               private toastCtrl: ToastController,
               public loadingCtrl: LoadingController,
-              public alerCtrl: AlertController) {
+              public alerCtrl: AlertController,
+              private userService: UserServiceProvider,) {
     this.clearNowData();
   }
 
@@ -86,13 +88,23 @@ export class PracticePage {
       loading.present();
       this.cognitiveService.CognitiveFile(base64Image)
       .subscribe(
-        data => {
+        data1 => {
           loading.dismiss();
-          if (data.length == 0) {
+          if (data1.length == 0) {
             this.showToast('未检测到人脸，请重试！', 2500, 'top','');
             return;
           }
-          this.result = data[0].faceAttributes;
+          this.result = data1[0].faceAttributes;
+          this.userService.addReport(data1[0].faceAttributes);
+          this.userService.addReport(data1[0].faceAttributes).
+          subscribe(
+            (data2) => {
+              console.log(data2.msg);
+            },
+            error2 => {
+              console.log(error2);
+            }
+          );
       },
         error1 => {
           loading.dismiss();
@@ -122,9 +134,18 @@ export class PracticePage {
     loading.present();
     this.cognitiveService.CognitiveUrl(this.photoUrl)
       .subscribe(
-        data => {
+        data1 => {
           loading.dismiss();
-          this.result = data[0].faceAttributes;
+          this.result = data1[0].faceAttributes;
+          this.userService.addReport(data1[0].faceAttributes).
+            subscribe(
+            (data2) => {
+              console.log(data2.msg);
+            },
+            error2 => {
+              console.log(error2);
+            }
+          );
           // console.log(this.result);
         },
         error1 => {

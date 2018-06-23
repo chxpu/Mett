@@ -25,7 +25,7 @@ export class TutorialPage {
   ) { }
 
   startApp() {
-    this.app.getRootNav().setRoot(HomePage).then(() => {
+    this.app.getRootNav().setRoot(LoginPage).then(() => {
       this.storage.set('hasSeenTutorial', 'true');
     })
   }

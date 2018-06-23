@@ -100,11 +100,14 @@ export class LoginPage {
               // 密码错误
               this.showToast(data.msg, 2500,'top','');
             }
-            else {
+            else if (data.code === 2) {
               // 登录成功，更新userToken
               this.userService.setUser(data.data);
-              this.showToast(data.msg, 1500,'top','');
+              this.showToast(data.msg, 2000,'top','');
               this.app.getRootNav().setRoot(HomePage);
+            }
+            else {
+              this.showToast('登录失败请重试！', 2000,'top','');
             }
           },
           error1 => {
