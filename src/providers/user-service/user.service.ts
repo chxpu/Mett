@@ -133,7 +133,7 @@ export class UserServiceProvider {
    * 获取当前用户的测试记录
    */
   getReport() {
-    console.log('this.NowUser' + this.NowUser.id);
+    // console.log('this.NowUser.id = ' + this.NowUser.id);
     const getReportUrl = 'http://113.55.114.13:8080/report/getReport/' + this.NowUser.id;
     const getReportOptions = {
       headers: new HttpHeaders({
@@ -142,6 +142,18 @@ export class UserServiceProvider {
     };
 
     return this.http.get<any>(getReportUrl, getReportOptions);
+  }
+
+
+
+  /**
+   * 删除记录
+   * @param {string} Reportid
+   */
+  deleteReport(Reportid: string) {
+    const deleteReportUrl = 'http://113.55.114.13:8080/report/deleteReport/' + Reportid;
+
+    return this.http.delete<any>(deleteReportUrl);
   }
 
 
