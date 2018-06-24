@@ -95,16 +95,17 @@ export class PracticePage {
             return;
           }
           this.result = data1[0].faceAttributes;
-          this.userService.addReport(data1[0].faceAttributes);
-          this.userService.addReport(data1[0].faceAttributes).
-          subscribe(
-            (data2) => {
-              console.log(data2.msg);
-            },
-            error2 => {
-              console.log(error2);
-            }
-          );
+          if (this.userService.getUser() != null) {
+            this.userService.addReport(data1[0].faceAttributes).
+            subscribe(
+              (data2) => {
+                console.log(data2.msg);
+              },
+              error2 => {
+                console.log(error2);
+              }
+            );
+          }
       },
         error1 => {
           loading.dismiss();
@@ -137,15 +138,17 @@ export class PracticePage {
         data1 => {
           loading.dismiss();
           this.result = data1[0].faceAttributes;
-          this.userService.addReport(data1[0].faceAttributes).
+          if (this.userService.getUser() != null) {
+            this.userService.addReport(data1[0].faceAttributes).
             subscribe(
-            (data2) => {
-              console.log(data2.msg);
-            },
-            error2 => {
-              console.log(error2);
-            }
-          );
+              (data2) => {
+                console.log(data2.msg);
+              },
+              error2 => {
+                console.log(error2);
+              }
+            );
+          }
           // console.log(this.result);
         },
         error1 => {

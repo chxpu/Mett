@@ -70,7 +70,7 @@ export class UserServiceProvider {
    * 获取当前用户信息
    */
   getUser() {
-    console.log('getUser： ID = ' + this.NowUser.id);
+    // console.log('getUser： ID = ' + this.NowUser.id);
     return this.NowUser
   }
 

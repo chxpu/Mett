@@ -5,17 +5,17 @@
   </div>
   <div class="score">
     <b style="text-align: center; margin-left: 5%; margin-right: auto;font-size: 1.5rem;">得分</b>
-    <b style="background-color: red;border: 1px solid  #5B5B5B; border-radius: 5px;text-align: center;margin-left: auto;margin-right: 5%;font-size: 1.2rem;padding-left: 1rem;padding-right: 1rem;">{{ FaceAttributesDataItem.score }}</b>
+    <b style="background-color: red;border: 1px solid  #5B5B5B; border-radius: 5px;text-align: center;margin-left: auto;margin-right: 5%;font-size: 1.2rem;padding-left: 1rem;padding-right: 1rem;">{{ (FaceAttributesDataItem.score)*100 }}</b>
     <b (click)="deleteReport(FaceAttributesDataItem.id)" style=";border: 1px solid  #5B5B5B; border-radius: 5px;text-align: center;margin-left: 0;margin-right: 5%;font-size: 1.2rem;padding-left: 1rem;padding-right: 1rem;">删除记录</b>
   </div>
   <div class="details">
-    <b [ngClass]="{'redBackColor': FaceAttributesDataItem.type=='anger'}">愤怒：{{ FaceAttributesDataItem.emotion.anger }}</b>
-    <b [ngClass]="{'redBackColor': FaceAttributesDataItem.type=='contempt'}">轻蔑：{{ FaceAttributesDataItem.emotion.contempt }}</b>
-    <b [ngClass]="{'redBackColor': FaceAttributesDataItem.type=='disgust'}">厌恶：{{ FaceAttributesDataItem.emotion.disgust }}</b>
-    <b [ngClass]="{'redBackColor': FaceAttributesDataItem.type=='fear'}">害怕：{{ FaceAttributesDataItem.emotion.fear }}</b>
-    <b [ngClass]="{'redBackColor': FaceAttributesDataItem.type=='happiness'}">高兴：{{ FaceAttributesDataItem.emotion.happiness }}</b>
-    <b [ngClass]="{'redBackColor': FaceAttributesDataItem.type=='sadness'}">悲伤：{{ FaceAttributesDataItem.emotion.sadness }}</b>
-    <b [ngClass]="{'redBackColor': FaceAttributesDataItem.type=='surprise'}">惊讶：{{ FaceAttributesDataItem.emotion.surprise }}</b>
-    <b [ngClass]="{'redBackColor': FaceAttributesDataItem.type=='neutral'}">中立：{{ FaceAttributesDataItem.emotion.neutral }}</b>
+    <b [ngClass]="{'redBackColor': FaceAttributesDataItem.type=='anger'}">愤怒：{{ (FaceAttributesDataItem.emotion.anger)*100 }} %</b>
+    <b [ngClass]="{'redBackColor': FaceAttributesDataItem.type=='contempt'}">轻蔑：{{ (FaceAttributesDataItem.emotion.contempt)*100 }}%</b>
+    <b [ngClass]="{'redBackColor': FaceAttributesDataItem.type=='disgust'}">厌恶：{{ (FaceAttributesDataItem.emotion.disgust)*100 }}%</b>
+    <b [ngClass]="{'redBackColor': FaceAttributesDataItem.type=='fear'}">害怕：{{ (FaceAttributesDataItem.emotion.fear)*100 }}%</b>
+    <b [ngClass]="{'redBackColor': FaceAttributesDataItem.type=='happiness'}">高兴：{{ (FaceAttributesDataItem.emotion.happiness)*100 }}%</b>
+    <b [ngClass]="{'redBackColor': FaceAttributesDataItem.type=='sadness'}">悲伤：{{ (FaceAttributesDataItem.emotion.sadness)*100 }}%</b>
+    <b [ngClass]="{'redBackColor': FaceAttributesDataItem.type=='surprise'}">惊讶：{{ (FaceAttributesDataItem.emotion.surprise)*100 }}%</b>
+    <b [ngClass]="{'redBackColor': FaceAttributesDataItem.type=='neutral'}">中立：{{ (FaceAttributesDataItem.emotion.neutral)*100 }}%</b>
   </div>
 </div>

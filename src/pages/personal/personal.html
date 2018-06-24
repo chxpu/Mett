@@ -12,7 +12,7 @@
     <div class="user-name">{{ NowUser==null?'未登录':NowUser.username }}</div>
   </div>
   <ion-list>
-    <button ion-item (click)="goPracticeReport()">
+    <button ion-item (click)="goPracticeReport()" *ngIf="NowUser!=null">
       <ion-icon name="copy" item-start></ion-icon>
       练习报告
     </button>
