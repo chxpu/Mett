@@ -105,8 +105,8 @@ export class UserServiceProvider {
     if (score < faceAttributes.emotion.sadness) {
       type = 'sadness'; score = faceAttributes.emotion.sadness;
     }
-    if (score < faceAttributes.emotion.sadness) {
-      type = 'sadness'; score = faceAttributes.emotion.sadness;
+    if (score < faceAttributes.emotion.surprise) {
+      type = 'surprise'; score = faceAttributes.emotion.surprise;
     }
 
     let addReportBody = {
@@ -115,7 +115,7 @@ export class UserServiceProvider {
       "gender" : faceAttributes.gender,
       "user" : {"id" : this.NowUser.id},
       "score" : score,
-      "angry" : faceAttributes.emotion.anger,
+      "anger" : faceAttributes.emotion.anger,
       "contempt" : faceAttributes.emotion.contempt,
       "disgust" : faceAttributes.emotion.disgust,
       "fear" : faceAttributes.emotion.fear,

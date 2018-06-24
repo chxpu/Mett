@@ -53,24 +53,32 @@ export class PersonalPage {
   }
 
   logout() {
-    let confirm = this.alerCtrl.create({
-      title: '提示',
-      message: '是否退出登录?',
-      buttons: [{
-        text: '确定',
-        handler: () => {
-          this.userService.setUser(null);
-          this.app.getRootNav().setRoot(LoginPage);
+    // 当前未登录
+    if (this.NowUser == null) {
+      this.app.getRootNav().setRoot(LoginPage);
+    }
+    // 当前登录
+    else {
+      let confirm = this.alerCtrl.create({
+        title: '提示',
+        message: '是否退出登录?',
+        buttons: [{
+          text: '确定',
+          handler: () => {
+            this.userService.setUser(null);
+            this.app.getRootNav().setRoot(LoginPage);
+          }
+        }, {
+          text: '取消',
+          handler: () => {
+            return;
+          }
         }
-      }, {
-        text: '取消',
-        handler: () => {
-          return;
-        }
-      }
-      ]
-    });
-    confirm.present();
+        ]
+      });
+      confirm.present();
+    }
+
   }
 
   goAbout() {
