@@ -62,7 +62,6 @@ export class UserServiceProvider {
    * 设置当前用户信息
    */
   setUser(nowUser: User) {
-    console.log('setUser：ID = ' + nowUser.id);
     this.NowUser = nowUser;
   }
 

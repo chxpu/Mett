@@ -12,7 +12,6 @@ import {PersonalPage} from "../personal/personal";
 export class HomePage {
 
   constructor(public navCtrl: NavController) {
-
   }
 
   /**

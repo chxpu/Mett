@@ -126,6 +126,14 @@ export class LoginPage {
   }
 
   /**
+   * 点击试用
+   */
+  goHome() {
+    this.userService.setUser(null);
+    this.navCtrl.push(HomePage);
+  }
+
+  /**
    * 封装showToast
    * @param {string} messageParam,
    * @param {number} durationParam
