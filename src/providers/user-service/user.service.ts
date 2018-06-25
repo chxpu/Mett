@@ -7,8 +7,11 @@ import {FaceAttributes} from "../../entity/FaceAttributes";
 @Injectable()
 export class UserServiceProvider {
   private NowUser: User;
+  private ServerIp: string;
 
   constructor(public http: HttpClient) {
+    // 动态设置服务器ip地址
+    this.ServerIp = '192.168.43.132';
   }
 
   /**
@@ -21,7 +24,7 @@ export class UserServiceProvider {
    * @constructor
    */
   Register(username:string, password:string, email:string, tel:string) {
-    const registUrl = 'http://113.55.114.13:8080/login/register';
+    const registUrl = 'http://'+this.ServerIp+':8080/login/register';
     const registerOptions = {
       headers: new HttpHeaders({
         'content-type': 'application/json'
@@ -44,7 +47,7 @@ export class UserServiceProvider {
    * @constructor
    */
   Login(username: string, password: string) {
-    const loginUrl = 'http://113.55.114.13:8080/login/login';
+    const loginUrl = 'http://'+this.ServerIp+':8080/login/login';
     const loginOptions = {
       headers: new HttpHeaders({
         'content-type': 'application/json'
@@ -80,7 +83,7 @@ export class UserServiceProvider {
   addReport(faceAttributes: FaceAttributes) {
     let type: string = 'anger';
     let score: number = faceAttributes.emotion.anger;
-    const addReportUrl = 'http://113.55.114.13:8080/report/addReport';
+    const addReportUrl = 'http://'+this.ServerIp+':8080/report/addReport';
     const addReportOptions = {
       headers: new HttpHeaders({
         'content-type': 'application/json'
@@ -133,7 +136,7 @@ export class UserServiceProvider {
    */
   getReport() {
     // console.log('this.NowUser.id = ' + this.NowUser.id);
-    const getReportUrl = 'http://113.55.114.13:8080/report/getReport/' + this.NowUser.id;
+    const getReportUrl = 'http://'+this.ServerIp+':8080/report/getReport/' + this.NowUser.id;
     const getReportOptions = {
       headers: new HttpHeaders({
         'content-type': 'application/json'
@@ -150,7 +153,7 @@ export class UserServiceProvider {
    * @param {string} Reportid
    */
   deleteReport(Reportid: string) {
-    const deleteReportUrl = 'http://113.55.114.13:8080/report/deleteReport/' + Reportid;
+    const deleteReportUrl = 'http://'+this.ServerIp+':8080/report/deleteReport/' + Reportid;
 
     return this.http.delete<any>(deleteReportUrl);
   }
